@@ -8,15 +8,18 @@ namespace RPG.Movement
     {
         NavMeshAgent navMeshAgent;
         Animator anim;
+        Health character;
 
         void Start()
         {
             anim = GetComponent<Animator>();
             navMeshAgent = GetComponent<NavMeshAgent>();
+            character = GetComponent<Health>();
         }
 
         void Update()
         {
+            navMeshAgent.enabled = !character.IsDead;
             UpdateAnimator();
         }
 
@@ -28,8 +31,8 @@ namespace RPG.Movement
 
         public void StartMovementAction(Vector3 destination)
         {
-            MoveTo(destination);
             GetComponent<ActionScheduler>().StartAction(this);
+            MoveTo(destination);
         }
 
         public void MoveTo(Vector3 destination)
