@@ -11,7 +11,7 @@ namespace RPG.Combat
         [SerializeField] float timeBetweenAttacks = 1f;
         float timeSinceLastAttack = 0f;
 
-        Transform target;
+        Health target;
         Mover mover;
 
         private void Start()
@@ -22,11 +22,11 @@ namespace RPG.Combat
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
-            if (target != null)
+            if (target != null && !target.IsDead)
             {
-                if (Vector3.Distance(transform.position, target.position) > weaponRange)
+                if (Vector3.Distance(transform.position, target.transform.position) > weaponRange)
                 {
-                    mover.MoveTo(target.position);
+                    mover.MoveTo(target.transform.position);
                 }
                 else
                 {
@@ -38,28 +38,40 @@ namespace RPG.Combat
 
         private void AttackBehaviour()
         {
+            transform.LookAt(target.transform);
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
+                GetComponent<Animator>().ResetTrigger("cancelAttack");
                 GetComponent<Animator>().SetTrigger("attack");
                 timeSinceLastAttack = 0;
             }
         }
 
+        public bool CanAttack(CombatTarget combatTarget)
+        {
+            return !combatTarget.GetComponent<Health>().IsDead;
+        }
+
         public void Attack(CombatTarget combatTarget)
         {
-            target = combatTarget.transform;
+            target = combatTarget.GetComponent<Health>();
             GetComponent<ActionScheduler>().StartAction(this);
         }
 
         public void Cancel()
         {
+            GetComponent<Animator>().ResetTrigger("attack");
+            GetComponent<Animator>().SetTrigger("cancelAttack");
             target = null;
         }
 
         //Animation event
         void Hit()
         {
-            target.GetComponent<Health>().TakeDamage(weaponDamage);
+            if (target != null)
+            {
+                target.TakeDamage(weaponDamage);
+            }
         }
     }
 }

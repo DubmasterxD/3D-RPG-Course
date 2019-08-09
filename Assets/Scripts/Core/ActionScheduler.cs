@@ -11,7 +11,9 @@ namespace RPG.Core
             if (action != currentAction)
             {
                 if (currentAction != null)
+                {
                     currentAction.Cancel();
+                }
                 currentAction = action;
             }
         }

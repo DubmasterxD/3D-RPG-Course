@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &8374958909443314419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7006719322275088908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0666a86adbaf5a4da8cdbf4208f26a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &2286660457626288671
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -26,6 +14,18 @@ CapsuleCollider:
   m_Height: 1.8900461
   m_Direction: 1
   m_Center: {x: 0, y: 0.9163935, z: 0.018736154}
+--- !u!114 &8374958909443314419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7006719322275088908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0666a86adbaf5a4da8cdbf4208f26a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4704111560552550102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -157,6 +157,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
       propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: healthPoints
       value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []

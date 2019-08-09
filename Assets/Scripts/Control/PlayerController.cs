@@ -17,8 +17,14 @@ namespace RPG.Control
 
         void Update()
         {
-            if(InteractWithCombat()) return;
-            if(InteractWithMovement()) return;
+            if (InteractWithCombat())
+            {
+                return;
+            }
+            if (InteractWithMovement())
+            {
+                return;
+            }
         }
 
         private bool InteractWithCombat()
@@ -27,8 +33,10 @@ namespace RPG.Control
             foreach (RaycastHit hit in hits)
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null)
+                if (target == null || !fighter.CanAttack(target))
+                {
                     continue;
+                }
                 if(Input.GetMouseButtonDown(0))
                 {
                     fighter.Attack(target);
