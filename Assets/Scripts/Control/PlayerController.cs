@@ -44,7 +44,7 @@ namespace RPG.Control
                 {
                     continue;
                 }
-                if(Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
                 {
                     fighter.Attack(target.gameObject);
                 }
