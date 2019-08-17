@@ -73,7 +73,7 @@ namespace RPG.Control
             }
             if (timeSinceArrivedAtWaypoint > waypointDwellTime)
             {
-                mover.StartMovementAction(nextPosition, 0.2f);
+                mover.StartMovementAction(nextPosition, patrolSpeedFraction);
             }
         }
 

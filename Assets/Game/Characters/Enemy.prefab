@@ -27,6 +27,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 5
+  suspicionTime: 5
+  patrolPath: {fileID: 0}
+  waypointTolerance: 1
+  waypointDwellTime: 0.5
 --- !u!114 &8374958909443314419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +170,12 @@ PrefabInstance:
     - target: {fileID: 2345401858034821130, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
         type: 3}
       propertyPath: weaponDamage
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1747257900049392165, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 1747257900049392166, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
         type: 3}
@@ -179,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
       propertyPath: healthPoints
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
