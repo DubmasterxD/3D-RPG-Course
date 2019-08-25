@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-//temp
-using UnityEngine.AI;
 
 namespace RPG.Saving
 {
@@ -11,35 +11,64 @@ namespace RPG.Saving
     {
         public void Save(string saveFile)
         {
-            string path = GetPathFromSaveFile(saveFile);
-            Debug.Log("saving to :" + path);
-            using (FileStream fs = File.Open(path, FileMode.Create))
-            {
-                Transform playerTransform = GetPlayerTransform();
-                byte[] buffer = SerializeVector(playerTransform.position);
-                fs.Write(buffer, 0, buffer.Length);
-            }
+            Dictionary<string, object> state = LoadFile(saveFile);
+            CaptureState(state);
+            SaveFile(saveFile, state);
         }
 
         public void Load(string saveFile)
         {
+            RestoreState(LoadFile(saveFile));
+        }
+
+        public IEnumerator LoadLastScene(string saveFile)
+        {
+            yield return null;
+        }
+
+        private void SaveFile(string saveFile, object state)
+        {
             string path = GetPathFromSaveFile(saveFile);
-            using (FileStream fs = File.Open(path, FileMode.Open))
+            Debug.Log("saving to :" + path);
+            using (FileStream fs = File.Open(path, FileMode.Create))
             {
-                byte[] buffer = new byte[fs.Length];
-                fs.Read(buffer, 0, buffer.Length);
-                //temp
-                Vector3 position = DeserializeVector(buffer);
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                player.GetComponent<NavMeshAgent>().enabled = false;
-                player.transform.position = position;//.ToVector();
-                player.GetComponent<NavMeshAgent>().enabled = true;
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(fs, state);
             }
         }
 
-        private Transform GetPlayerTransform()
+        private Dictionary<string, object> LoadFile(string saveFile)
         {
-            return GameObject.FindGameObjectWithTag("Player").transform;
+            string path = GetPathFromSaveFile(saveFile);
+            using (FileStream fs = File.Open(path, FileMode.OpenOrCreate))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                Dictionary<string, object> state = new Dictionary<string, object>();
+                if (fs.Length > 0)
+                {
+                    state = (Dictionary<string, object>)bf.Deserialize(fs);
+                }
+                return state;
+            }
+        }
+
+        private void CaptureState(Dictionary<string, object> state)
+        {
+            foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
+            {
+                state[saveable.GetUniqueidentifier()] = saveable.CaptureState();
+            }
+        }
+
+        private void RestoreState(Dictionary<string, object> state)
+        {
+            foreach (SaveableEntity saveable in FindObjectsOfType<SaveableEntity>())
+            {
+                if (state.ContainsKey(saveable.GetUniqueidentifier()))
+                {
+                    saveable.RestoreState(state[saveable.GetUniqueidentifier()]);
+                }
+            }
         }
 
         private byte[] SerializeVector(Vector3 vector)

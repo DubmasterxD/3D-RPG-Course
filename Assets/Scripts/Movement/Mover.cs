@@ -5,7 +5,7 @@ using RPG.Saving;
 
 namespace RPG.Movement
 {
-    public class Mover : MonoBehaviour, IAction//, ISaveable
+    public class Mover : MonoBehaviour, IAction, ISaveable
     {
         NavMeshAgent navMeshAgent;
         Animator anim;
@@ -57,14 +57,14 @@ namespace RPG.Movement
 
         public object CaptureState()
         {
-            return null;//new SerializableVector3(transform.position);
+            return new SerializableVector3(transform.position);
         }
 
         public void RestoreState(object state)
         {
-            Vector3 position = (Vector3)state;//SerializableVector3 position = (SerializableVector3)state;
+            SerializableVector3 position = (SerializableVector3)state;
             GetComponent<NavMeshAgent>().enabled = false;
-            transform.position = position;//.ToVector();
+            transform.position = position.ToVector();
             GetComponent<NavMeshAgent>().enabled = true;
         }
     }
