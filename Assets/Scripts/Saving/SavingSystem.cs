@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RPG.Saving
 {
@@ -23,7 +24,12 @@ namespace RPG.Saving
 
         public IEnumerator LoadLastScene(string saveFile)
         {
-            yield return null;
+            Dictionary<string, object> state = LoadFile(saveFile);
+            if (state.ContainsKey("lastSceneBuildIndex"))
+            {
+                yield return SceneManager.LoadSceneAsync((int)state["lastSceneBuildIndex"]);
+            }
+            RestoreState(state);
         }
 
         private void SaveFile(string saveFile, object state)
@@ -58,6 +64,7 @@ namespace RPG.Saving
             {
                 state[saveable.GetUniqueidentifier()] = saveable.CaptureState();
             }
+            state["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;
         }
 
         private void RestoreState(Dictionary<string, object> state)

@@ -1,8 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-//tmp
-using UnityEngine.AI;
-using RPG.Core;
 using System.Collections.Generic;
 
 namespace RPG.Saving
@@ -11,11 +8,34 @@ namespace RPG.Saving
     public class SaveableEntity : MonoBehaviour
     {
         [SerializeField] string uniqueIdentifier = "";
+        static Dictionary<string, SaveableEntity> globalLookup = new Dictionary<string, SaveableEntity>();
 
         public string GetUniqueidentifier()
         {
             return uniqueIdentifier;
         }
+
+#if UNITY_EDITOR
+        private void Update()
+        {
+            if(Application.IsPlaying(gameObject))
+            {
+                return;
+            }
+            if(string.IsNullOrEmpty(gameObject.scene.path))
+            {
+                return;
+            }
+            SerializedObject serializedObject = new SerializedObject(this);
+            SerializedProperty property = serializedObject.FindProperty("uniqueIdentifier");
+            if(string.IsNullOrEmpty(property.stringValue) || !IsUnique(property.stringValue))
+            {
+                property.stringValue = GUID.Generate().ToString();
+                serializedObject.ApplyModifiedProperties();
+            }
+            globalLookup[property.stringValue] = this;
+        }
+#endif
 
         public object CaptureState()
         {
@@ -39,22 +59,15 @@ namespace RPG.Saving
             }
         }
 
-        private void Update()
+        private bool IsUnique(string candidate)
         {
-            if(Application.IsPlaying(gameObject))
+            if (globalLookup.ContainsKey(candidate) && globalLookup[candidate] != this && globalLookup[candidate] != null && globalLookup[candidate].GetUniqueidentifier()==candidate)
             {
-                return;
+                return false;
             }
-            if(string.IsNullOrEmpty(gameObject.scene.path))
+            else
             {
-                return;
-            }
-            SerializedObject serializedObject = new SerializedObject(this);
-            SerializedProperty property = serializedObject.FindProperty("uniqueIdentifier");
-            if(string.IsNullOrEmpty(property.stringValue))
-            {
-                property.stringValue = GUID.Generate().ToString();
-                serializedObject.ApplyModifiedProperties();
+                return true;
             }
         }
     }
