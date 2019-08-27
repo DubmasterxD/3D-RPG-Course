@@ -7,7 +7,8 @@ namespace RPG.Combat
     public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] Transform handTransform = null;
+        [SerializeField] Transform rightHandTransform = null;
+        [SerializeField] Transform leftHandTransform = null;
         [SerializeField] Weapon defaultWeapon = null;
 
         Weapon equippedWeapon = null;
@@ -42,7 +43,7 @@ namespace RPG.Combat
         public void EquipWeapon(Weapon weapon)
         {
             Animator anim = GetComponent<Animator>();
-            weapon.Spawn(handTransform, anim);
+            weapon.Spawn(rightHandTransform, leftHandTransform, anim);
             equippedWeapon = weapon;
         }
 
@@ -82,6 +83,14 @@ namespace RPG.Combat
             if (currentTarget != null)
             {
                 currentTarget.TakeDamage(equippedWeapon.Damage);
+            }
+        }
+
+        void Shoot()
+        {
+            if (currentTarget != null)
+            {
+                equippedWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, currentTarget);
             }
         }
     }
