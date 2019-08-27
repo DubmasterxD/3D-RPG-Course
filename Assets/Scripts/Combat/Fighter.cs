@@ -6,9 +6,11 @@ namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour, IAction
     {
-        [SerializeField] float weaponRange = 2f;
-        [SerializeField] float weaponDamage = 5f;
         [SerializeField] float timeBetweenAttacks = 1f;
+        [SerializeField] Transform handTransform = null;
+        [SerializeField] Weapon defaultWeapon = null;
+
+        Weapon equippedWeapon = null;
         float timeSinceLastAttack = Mathf.Infinity;
 
         Health currentTarget;
@@ -17,6 +19,7 @@ namespace RPG.Combat
         private void Start()
         {
             mover = GetComponent<Mover>();
+            EquipWeapon(defaultWeapon);
         }
 
         private void Update()
@@ -24,7 +27,7 @@ namespace RPG.Combat
             timeSinceLastAttack += Time.deltaTime;
             if (currentTarget != null && !currentTarget.IsDead)
             {
-                if (Vector3.Distance(transform.position, currentTarget.transform.position) > weaponRange)
+                if (Vector3.Distance(transform.position, currentTarget.transform.position) > equippedWeapon.Range)
                 {
                     mover.MoveTo(currentTarget.transform.position, 1);
                 }
@@ -34,6 +37,13 @@ namespace RPG.Combat
                     AttackBehaviour();
                 }
             }
+        }
+
+        public void EquipWeapon(Weapon weapon)
+        {
+            Animator anim = GetComponent<Animator>();
+            weapon.Spawn(handTransform, anim);
+            equippedWeapon = weapon;
         }
 
         private void AttackBehaviour()
@@ -71,7 +81,7 @@ namespace RPG.Combat
         {
             if (currentTarget != null)
             {
-                currentTarget.TakeDamage(weaponDamage);
+                currentTarget.TakeDamage(equippedWeapon.Damage);
             }
         }
     }

@@ -100,6 +100,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+--- !u!4 &4704111560552708568 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 423694, guid: 30cf93deff988e74e88a144bd2127c18,
+    type: 3}
+  m_PrefabInstance: {fileID: 4704111560552550102}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8719918671052597288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,6 +178,23 @@ PrefabInstance:
       propertyPath: weaponDamage
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2345401858034821130, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+        type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 43f3d82f2e0e7604a9e34d116f6c3c49,
+        type: 2}
+    - target: {fileID: 2345401858034821130, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+        type: 3}
+      propertyPath: handTransform
+      value: 
+      objectReference: {fileID: 4704111560552708568}
+    - target: {fileID: 2345401858034821130, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+        type: 3}
+      propertyPath: defaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 43f3d82f2e0e7604a9e34d116f6c3c49,
+        type: 2}
     - target: {fileID: 1747257900049392165, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
         type: 3}
       propertyPath: maxSpeed
