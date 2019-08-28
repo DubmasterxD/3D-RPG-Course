@@ -16,11 +16,13 @@ namespace RPG.Combat
         public float Range { get => range; }
         public float Damage { get => damage; }
 
+        GameObject equippedWeapon = null;
+
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
         {
             Transform handTransform = GetTransform(rightHand, leftHand);
             Projectile projectileInstance = Instantiate(projectile, handTransform.position, Quaternion.identity);
-            projectileInstance.SetTarget(target,damage);
+            projectileInstance.SetTarget(target, damage);
         }
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator anim)
@@ -28,12 +30,17 @@ namespace RPG.Combat
             if (equippedPrefab != null)
             {
                 Transform handTransform = GetTransform(rightHand, leftHand);
-                Instantiate(equippedPrefab, handTransform);
+                equippedWeapon = Instantiate(equippedPrefab, handTransform);
             }
             if (animatorOverride != null)
             {
                 anim.runtimeAnimatorController = animatorOverride;
             }
+        }
+
+        public void DespawEquippedWeapon()
+        {
+            Destroy(equippedWeapon);
         }
 
         private Transform GetTransform(Transform rightHand, Transform leftHand)

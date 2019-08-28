@@ -42,6 +42,10 @@ namespace RPG.Combat
 
         public void EquipWeapon(Weapon weapon)
         {
+            if (equippedWeapon != null)
+            {
+                equippedWeapon.DespawEquippedWeapon();
+            }
             Animator anim = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, anim);
             equippedWeapon = weapon;
