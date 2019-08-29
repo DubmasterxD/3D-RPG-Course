@@ -4,6 +4,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] float speed = 1f;
+    [SerializeField] bool isFollowingTarget = false;
+    [SerializeField] GameObject hitEffect = null;
 
     float damage = 0;
     Health target;
@@ -12,7 +14,10 @@ public class Projectile : MonoBehaviour
     {
         if (target != null)
         {
-            transform.LookAt(GetAimLocation());
+            if(isFollowingTarget && !target.IsDead)
+            {
+                transform.LookAt(GetAimLocation());
+            }
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
     }
@@ -21,6 +26,7 @@ public class Projectile : MonoBehaviour
     {
         this.target = target;
         this.damage = damage;
+        transform.LookAt(GetAimLocation());
     }
 
     private Vector3 GetAimLocation()
@@ -40,6 +46,10 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject == target.gameObject)
         {
+            if (hitEffect != null)
+            {
+                Instantiate(hitEffect, transform.position, transform.rotation);
+            }
             target.TakeDamage(damage);
             Destroy(gameObject);
         }

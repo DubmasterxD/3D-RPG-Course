@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3181110758761935880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.056}
+  m_LocalPosition: {x: 0, y: 0, z: -0.552}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2079826824565686943}
@@ -191,6 +191,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  isFollowingTarget: 0
+  hitEffect: {fileID: 6239765112607040129, guid: db74d91491d08c043bf3cb7132e3be22,
+    type: 3}
 --- !u!136 &4406998277779503295
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -204,7 +207,7 @@ CapsuleCollider:
   m_Radius: 0.062947705
   m_Height: 0.80594337
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.3744952}
+  m_Center: {x: 0, y: 0, z: -0.24}
 --- !u!1001 &7773148408585443108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,11 +225,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4750687242688692, guid: c7f49c6920d49ba468b083941d79f2c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4750687242688692, guid: c7f49c6920d49ba468b083941d79f2c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.608
       objectReference: {fileID: 0}
     - target: {fileID: 4750687242688692, guid: c7f49c6920d49ba468b083941d79f2c0, type: 3}
       propertyPath: m_LocalRotation.x
