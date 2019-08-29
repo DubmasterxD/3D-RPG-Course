@@ -48,7 +48,13 @@ namespace RPG.SceneManagement
 
             savingWrapper.Save();
             yield return new WaitForSeconds(waitTime);
+            StartCoroutine(DestroyIn(fadeInTime));
             yield return fader.FadeIn(fadeInTime);
+        }
+
+        IEnumerator DestroyIn(float time)
+        {
+            yield return new WaitForSeconds(time);
             Destroy(gameObject);
         }
 
@@ -71,7 +77,6 @@ namespace RPG.SceneManagement
             player.GetComponent<NavMeshAgent>().enabled = false;
             player.transform.position = otherPortal.spawnPoint.position;
             player.transform.rotation = otherPortal.spawnPoint.rotation;
-            player.GetComponent<NavMeshAgent>().enabled = true;
         }
     }
 }

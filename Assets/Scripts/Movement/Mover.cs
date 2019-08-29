@@ -33,6 +33,7 @@ namespace RPG.Movement
 
         public void StartMovementAction(Vector3 destination, float speedFraction)
         {
+            GetComponent<NavMeshAgent>().enabled = true;
             GetComponent<ActionScheduler>().StartAction(this);
             MoveTo(destination, speedFraction);
         }
@@ -65,7 +66,7 @@ namespace RPG.Movement
             SerializableVector3 position = (SerializableVector3)state;
             GetComponent<NavMeshAgent>().enabled = false;
             transform.position = position.ToVector();
-            GetComponent<NavMeshAgent>().enabled = true;
+            //GetComponent<NavMeshAgent>().enabled = true;
         }
     }
 }
