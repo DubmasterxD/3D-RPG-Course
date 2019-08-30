@@ -2,6 +2,7 @@
 using RPG.Movement;
 using RPG.Core;
 using RPG.Saving;
+using RPG.Resources;
 
 namespace RPG.Combat
 {
@@ -14,9 +15,10 @@ namespace RPG.Combat
 
         Weapon equippedWeapon = null;
         float timeSinceLastAttack = Mathf.Infinity;
-
-        Health currentTarget;
+        
+        public Health currentTarget { get; private set; }
         Mover mover;
+
 
         private void Start()
         {
@@ -90,7 +92,7 @@ namespace RPG.Combat
         {
             if (currentTarget != null)
             {
-                currentTarget.TakeDamage(equippedWeapon.Damage);
+                currentTarget.TakeDamage(gameObject, equippedWeapon.Damage);
             }
         }
 
@@ -98,7 +100,7 @@ namespace RPG.Combat
         {
             if (currentTarget != null)
             {
-                equippedWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, currentTarget);
+                equippedWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, currentTarget, gameObject);
             }
         }
 
@@ -109,7 +111,7 @@ namespace RPG.Combat
 
         public void RestoreState(object state)
         {
-            Weapon weapon = Resources.Load<Weapon>((string)state);
+            Weapon weapon = UnityEngine.Resources.Load<Weapon>((string)state);
             EquipWeapon(weapon);
         }
     }

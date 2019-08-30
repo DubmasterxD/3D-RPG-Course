@@ -1,4 +1,4 @@
-﻿using RPG.Core;
+﻿using RPG.Resources;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -18,11 +18,11 @@ namespace RPG.Combat
 
         GameObject equippedWeapon = null;
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator)
         {
             Transform handTransform = GetTransform(rightHand, leftHand);
             Projectile projectileInstance = Instantiate(projectile, handTransform.position, Quaternion.identity);
-            projectileInstance.SetTarget(target, damage);
+            projectileInstance.SetTarget(target, instigator, damage);
         }
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator anim)
