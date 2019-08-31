@@ -18,14 +18,15 @@ namespace RPG.Combat
 
         private void Update()
         {
-            if (target != null)
+            if (target == null)
             {
-                if (isFollowingTarget && !target.IsDead)
-                {
-                    transform.LookAt(GetAimLocation());
-                }
-                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                return;
             }
+            if (isFollowingTarget && !target.IsDead)
+            {
+                transform.LookAt(GetAimLocation());
+            }
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
         public void SetTarget(Health target, GameObject instigator, float damage)
@@ -52,15 +53,16 @@ namespace RPG.Combat
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject == target.gameObject)
+            if (other.gameObject != target.gameObject)
             {
-                if (hitEffect != null)
-                {
-                    Instantiate(hitEffect, transform.position, transform.rotation);
-                }
-                target.TakeDamage(instigator, damage);
-                DestroyParticle();
+                return;
             }
+            if (hitEffect != null)
+            {
+                Instantiate(hitEffect, transform.position, transform.rotation);
+            }
+            target.TakeDamage(instigator, damage);
+            DestroyParticle();
         }
 
         private void DestroyParticle()

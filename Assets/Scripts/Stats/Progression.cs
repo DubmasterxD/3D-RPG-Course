@@ -2,18 +2,25 @@
 
 namespace RPG.Stats
 {
-    [CreateAssetMenu(fileName = "Progression", menuName ="Stats/New Progression", order =0)]
+    [CreateAssetMenu(fileName = "Progression", menuName = "Stats/New Progression", order = 0)]
     public class Progression : ScriptableObject
     {
         [SerializeField] ProgressionCharacterClass[] characterClasses = null;
 
-        public float GetHealth(CharacterClass characterClass, int level)
+        public float GetStat(Stat stat, CharacterClass characterClass, int level)
         {
-            foreach(ProgressionCharacterClass progressionCharacterClass in characterClasses)
+            foreach (ProgressionCharacterClass progressionCharacterClass in characterClasses)
             {
-                if(characterClass==progressionCharacterClass.characterClass)
+                if (characterClass != progressionCharacterClass.characterClass)
                 {
-                    //return progressionCharacterClass.health[level - 1];
+                    continue;
+                }
+                foreach (ProgressionStats progressionStat in progressionCharacterClass.stats)
+                {
+                    if (progressionStat.stat == stat && progressionStat.levels.Length >= level)
+                    {
+                        return progressionStat.levels[level - 1];
+                    }
                 }
             }
             return 0;
@@ -23,7 +30,7 @@ namespace RPG.Stats
         class ProgressionCharacterClass
         {
             public CharacterClass characterClass = default;
-            public ProgressionStats[] stats =null;
+            public ProgressionStats[] stats = null;
         }
 
         [System.Serializable]

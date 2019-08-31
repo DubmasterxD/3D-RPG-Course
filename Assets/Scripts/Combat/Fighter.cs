@@ -32,17 +32,18 @@ namespace RPG.Combat
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
-            if (currentTarget != null && !currentTarget.IsDead)
+            if (currentTarget == null || currentTarget.IsDead)
             {
-                if (Vector3.Distance(transform.position, currentTarget.transform.position) > equippedWeapon.Range)
-                {
-                    mover.MoveTo(currentTarget.transform.position, 1);
-                }
-                else
-                {
-                    mover.Cancel();
-                    AttackBehaviour();
-                }
+                return;
+            }
+            if (Vector3.Distance(transform.position, currentTarget.transform.position) > equippedWeapon.Range)
+            {
+                mover.MoveTo(currentTarget.transform.position, 1);
+            }
+            else
+            {
+                mover.Cancel();
+                AttackBehaviour();
             }
         }
 
