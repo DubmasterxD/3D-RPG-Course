@@ -14,18 +14,6 @@ CapsuleCollider:
   m_Height: 1.8975601
   m_Direction: 1
   m_Center: {x: 0, y: 0.8992791, z: 0}
---- !u!114 &6934971291517442514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3172478944234843247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdcfef8c188980045b7b27776f1845fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5494655115024640114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39,6 +27,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experiencePoints: 0
+--- !u!114 &6934971291517442514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3172478944234843247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcfef8c188980045b7b27776f1845fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3763154446456344139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,6 +116,22 @@ PrefabInstance:
       propertyPath: uniqueIdentifier
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 8065860162698990123, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+        type: 3}
+      propertyPath: startingLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065860162698990123, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+        type: 3}
+      propertyPath: characterClass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065860162698990123, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+        type: 3}
+      propertyPath: levelUpEffect
+      value: 
+      objectReference: {fileID: 1582603378087181394, guid: b5e15701777d8364e86cad1dc21a5359,
+        type: 3}
     - target: {fileID: 2345401858034821130, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
         type: 3}
       propertyPath: weaponRange
@@ -178,16 +194,6 @@ PrefabInstance:
     - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
       propertyPath: healthPoints
       value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065860162698990123, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
-        type: 3}
-      propertyPath: startingLevel
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065860162698990123, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
-        type: 3}
-      propertyPath: characterClass
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}

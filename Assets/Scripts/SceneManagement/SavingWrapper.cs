@@ -24,6 +24,10 @@ namespace RPG.SceneManagement
             {
                 StartCoroutine(LoadLastScene());
             }
+            if(Input.GetKeyDown(KeyCode.D))
+            {
+                Delete();
+            }
         }
 
         private IEnumerator LoadLastScene()
@@ -42,6 +46,11 @@ namespace RPG.SceneManagement
         public void Load()
         {
             GetComponent<SavingSystem>().Load(defaultSaveFile);
+        }
+
+        private void Delete()
+        {
+            GetComponent<SavingSystem>().Delete(defaultSaveFile);
         }
     }
 }

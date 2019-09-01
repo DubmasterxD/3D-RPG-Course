@@ -18,11 +18,11 @@ namespace RPG.Combat
 
         GameObject equippedWeapon = null;
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage)
         {
             Transform handTransform = GetTransform(rightHand, leftHand);
             Projectile projectileInstance = Instantiate(projectile, handTransform.position, Quaternion.identity);
-            projectileInstance.SetTarget(target, instigator, damage);
+            projectileInstance.SetTarget(target, instigator, calculatedDamage);
         }
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator anim)
