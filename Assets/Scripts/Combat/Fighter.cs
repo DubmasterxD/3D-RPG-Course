@@ -1,13 +1,14 @@
-﻿using UnityEngine;
-using RPG.Movement;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using RPG.Core;
-using RPG.Saving;
+using RPG.Movement;
 using RPG.Resources;
+using RPG.Saving;
 using RPG.Stats;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
@@ -88,6 +89,33 @@ namespace RPG.Combat
             mover.Cancel();
             currentTarget = null;
         }
+        
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if(stat==Stat.Damage)
+            {
+                yield return equippedWeapon.Damage;
+            }
+        }
+        
+        public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        {
+            if(stat==Stat.Damage)
+            {
+                yield return equippedWeapon.PercentageBonus;
+            }
+        }
+
+        public object CaptureState()
+        {
+            return equippedWeapon.name;
+        }
+
+        public void RestoreState(object state)
+        {
+            Weapon weapon = UnityEngine.Resources.Load<Weapon>((string)state);
+            EquipWeapon(weapon);
+        }
 
         //Animation event
         void Hit()
@@ -106,17 +134,6 @@ namespace RPG.Combat
                 float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
                 equippedWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, currentTarget, gameObject, damage);
             }
-        }
-
-        public object CaptureState()
-        {
-            return equippedWeapon.name;
-        }
-
-        public void RestoreState(object state)
-        {
-            Weapon weapon = UnityEngine.Resources.Load<Weapon>((string)state);
-            EquipWeapon(weapon);
         }
     }
 }

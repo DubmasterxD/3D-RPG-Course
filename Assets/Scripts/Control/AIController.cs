@@ -30,8 +30,12 @@ namespace RPG.Control
             player = GameObject.FindWithTag("Player");
             fighter = GetComponent<Fighter>();
             thisCharacter = GetComponent<Health>();
-            guardPosition = transform.position;
             mover = GetComponent<Mover>();
+        }
+
+        private void Start()
+        {
+            guardPosition = transform.position;
         }
 
         private void Update()

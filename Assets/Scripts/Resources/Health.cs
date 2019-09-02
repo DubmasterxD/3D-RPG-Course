@@ -14,9 +14,13 @@ namespace RPG.Resources
         GameObject instigator = null;
         BaseStats baseStats = null;
 
-        private void Start()
+        private void Awake()
         {
             baseStats = GetComponent<BaseStats>();
+        }
+
+        private void Start()
+        {
             if(gameObject.CompareTag("Player"))
             {
                 baseStats.onLevelUp += UpdateHealth;
