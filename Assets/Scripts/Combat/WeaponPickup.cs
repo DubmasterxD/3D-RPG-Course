@@ -12,9 +12,14 @@ namespace RPG.Combat
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                other.GetComponent<Fighter>().EquipWeapon(weapon);
-                StartCoroutine(HideForSeconds(respawnTime));
+                PickUp(other);
             }
+        }
+
+        private void PickUp(Collider other)
+        {
+            other.GetComponent<Fighter>().EquipWeapon(weapon);
+            StartCoroutine(HideForSeconds(respawnTime));
         }
 
         private IEnumerator HideForSeconds(float seconds)
