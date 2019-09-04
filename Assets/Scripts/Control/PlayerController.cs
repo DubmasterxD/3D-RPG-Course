@@ -3,6 +3,8 @@ using RPG.Movement;
 using RPG.Combat;
 using RPG.Resources;
 using UnityEngine.EventSystems;
+using System;
+using UnityEngine.AI;
 
 namespace RPG.Control
 {
@@ -11,15 +13,7 @@ namespace RPG.Control
         Mover mover;
         Fighter fighter;
         Health player;
-
-        enum CursorType
-        {
-            None,
-            Movement,
-            Combat,
-            UI
-        }
-
+        
         [System.Serializable]
         struct CursorMapping
         {
@@ -29,6 +23,7 @@ namespace RPG.Control
         }
 
         [SerializeField] CursorMapping[] cursorMappings = null;
+        [SerializeField] float maxNavMesHProjectionDistance = 1f;
 
         void Awake()
         {
@@ -53,10 +48,6 @@ namespace RPG.Control
             {
                 return;
             }
-            if (InteractWithCombat())
-            {
-                return;
-            }
             if (InteractWithMovement())
             {
                 return;
@@ -71,15 +62,15 @@ namespace RPG.Control
 
         private bool InteractWithComponent()
         {
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            RaycastHit[] hits =RaycastAllSorted();
             foreach(RaycastHit hit in hits)
             {
                 IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
                 foreach(IRaycastable raycastable in raycastables)
                 {
-                    if(raycastable.HandleRaycast())
+                    if(raycastable.HandleRaycast(this))
                     {
-                        SetCursor(CursorType.Combat);
+                        SetCursor(raycastable.GetCursorType());
                         return true;
                     }
                 }
@@ -87,40 +78,52 @@ namespace RPG.Control
             return false;
         }
 
-        private bool InteractWithCombat()
+        private RaycastHit[] RaycastAllSorted()
         {
             RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
-            foreach (RaycastHit hit in hits)
+            float[] distances = new float[hits.Length];
+            for(int i=0; i<hits.Length;i++)
             {
-                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null || !fighter.CanAttack(target.gameObject))
-                {
-                    continue;
-                }
-                if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
-                {
-                    fighter.Attack(target.gameObject);
-                }
-                SetCursor(CursorType.Combat);
-                return true;
+                distances[i] = hits[i].distance;
             }
-            return false;
+            Array.Sort(distances, hits);
+            return hits;
         }
 
         private bool InteractWithMovement()
         {
-            RaycastHit hit;
-            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            Vector3 target;
+            bool hasHit = RaycastNavMesh(out target);
             if (hasHit)
             {
                 if (Input.GetMouseButton(0))
                 {
-                    mover.StartMovementAction(hit.point,1);
+                    mover.StartMovementAction(target, 1);
                 }
                 SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        private bool RaycastNavMesh(out Vector3 target)
+        {
+            target = new Vector3();
+            RaycastHit raycastHit;
+            bool hasHit = Physics.Raycast(GetMouseRay(), out raycastHit);
+            if (!hasHit)
+            {
+                return false;
+            }
+            NavMeshHit navMeshHit;
+            hasHit = NavMesh.SamplePosition(raycastHit.point, out navMeshHit, maxNavMesHProjectionDistance, NavMesh.AllAreas);
+            if(!hasHit)
+            {
+                return false;
+            }
+            target = navMeshHit.position;
+            return true;
+                
         }
 
         private void SetCursor(CursorType type)

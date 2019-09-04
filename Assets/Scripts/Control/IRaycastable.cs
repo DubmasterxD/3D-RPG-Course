@@ -2,6 +2,7 @@
 {
     public interface IRaycastable
     {
-        bool HandleRaycast();
+        CursorType GetCursorType();
+        bool HandleRaycast(PlayerController callingController);
     }
 }
