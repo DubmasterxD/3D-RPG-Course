@@ -184,6 +184,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8065860162698990123, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+        type: 3}
+      propertyPath: characterClass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2345401858034821130, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
         type: 3}
       propertyPath: weaponDamage
@@ -227,6 +232,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
       propertyPath: health
       value: 20
       objectReference: {fileID: 0}
@@ -234,9 +243,25 @@ PrefabInstance:
       propertyPath: healthPoints
       value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 8065860162698990123, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 772592647374847937}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356647200767854245, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
         type: 3}
-      propertyPath: characterClass
+      propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -253,3 +278,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8719918671052597288}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &772592647374847937 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8339421036294035433, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+    type: 3}
+  m_PrefabInstance: {fileID: 8719918671052597288}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0816bc7dc3812459340df2cb896b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

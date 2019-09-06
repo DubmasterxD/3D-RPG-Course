@@ -2,11 +2,20 @@
 using RPG.Saving;
 using RPG.Stats;
 using RPG.Core;
+using UnityEngine.Events;
 
 namespace RPG.Resources
 {
     public class Health : MonoBehaviour, ISaveable
     {
+        [SerializeField] TakeDamageEvent takeDamage;
+
+        [System.Serializable]
+        public class TakeDamageEvent : UnityEvent<float>
+        {
+
+        }
+
         float healthPoints = -1f;
 
         public bool IsDead { get; private set; } = false;
@@ -40,6 +49,7 @@ namespace RPG.Resources
         {
             if (!IsDead)
             {
+                takeDamage.Invoke(damage);
                 healthPoints -= damage;
                 this.instigator = instigator;
                 CheckIfDead();

@@ -55,6 +55,8 @@ MonoBehaviour:
   - type: 4
     texture: {fileID: 2800000, guid: f8c873f1e53e83f4aabf342d6be1dfc3, type: 3}
     hotspot: {x: 0, y: 0}
+  maxNavMesHProjectionDistance: 1
+  maxPathLength: 40
 --- !u!1001 &3763154446456344139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,8 +215,37 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
       propertyPath: healthPoints
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5152956044159195554}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224290898, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356647200767854245, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbc55f0f75b064e4eb02e25f4c6a0c21, type: 3}
@@ -230,6 +261,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3763154446456344139}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5152956044159195554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8339421036294035433, guid: bbc55f0f75b064e4eb02e25f4c6a0c21,
+    type: 3}
+  m_PrefabInstance: {fileID: 3763154446456344139}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0816bc7dc3812459340df2cb896b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4693975113295824866
 PrefabInstance:
   m_ObjectHideFlags: 0
