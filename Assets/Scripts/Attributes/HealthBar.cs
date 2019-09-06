@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 namespace RPG.Attributes
 {
@@ -19,7 +18,6 @@ namespace RPG.Attributes
             else
             {
                 canvas.enabled = true;
-                Debug.Log(gameObject.transform.localScale);
                 healthBar.localScale = new Vector3(healthFraction, 1, 1);
             }
         }

@@ -97,5 +97,15 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.a
       value: 0.19607843
       objectReference: {fileID: 0}
+    - target: {fileID: 7096716424689220031, guid: b5faf82ec5c32eb488c91e6a681e7a5b,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7096716424689220031, guid: b5faf82ec5c32eb488c91e6a681e7a5b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 94fc62564eabf2e429355affe6bee585, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5faf82ec5c32eb488c91e6a681e7a5b, type: 3}

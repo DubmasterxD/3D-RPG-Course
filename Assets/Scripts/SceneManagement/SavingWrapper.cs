@@ -35,6 +35,14 @@ namespace RPG.SceneManagement
             Fader fader = FindObjectOfType<Fader>();
             fader.FadeOutImidiate();
             yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
+            Coroutine fadeIn = StartCoroutine(FadeIn(fadeInTime));
+            yield return new WaitForSeconds(fadeInTime);
+            StopCoroutine(fadeIn);
+        }
+
+        IEnumerator FadeIn(float time)
+        {
+            Fader fader = FindObjectOfType<Fader>();
             yield return fader.FadeIn(fadeInTime);
         }
 

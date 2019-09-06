@@ -78,15 +78,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 89f52f90ac76cae41b6bea94c48834c3,
         type: 2}
-    - target: {fileID: 4704111560549297546, guid: d01591a8d8e82b147a0517588a4475ea,
+    - target: {fileID: 6453611283137036322, guid: d01591a8d8e82b147a0517588a4475ea,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: defaultWeaponConfig
       value: 
-      objectReference: {fileID: 2100000, guid: bfbe2e8b331e2cc42be1591f949c0e41, type: 2}
+      objectReference: {fileID: 11400000, guid: 89f52f90ac76cae41b6bea94c48834c3,
+        type: 2}
     - target: {fileID: 1651957678312208899, guid: d01591a8d8e82b147a0517588a4475ea,
         type: 3}
       propertyPath: characterClass
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4704111560549297546, guid: d01591a8d8e82b147a0517588a4475ea,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bfbe2e8b331e2cc42be1591f949c0e41, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d01591a8d8e82b147a0517588a4475ea, type: 3}

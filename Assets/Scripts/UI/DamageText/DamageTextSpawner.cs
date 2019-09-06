@@ -12,7 +12,6 @@ namespace RPG.UI.DamageText
             {
                 DamageText instance = Instantiate(damageTextPrefab, transform);
                 instance.SetText(damage.ToString());
-                Debug.Log(damage);
             }
         }
     }

@@ -9,12 +9,14 @@ namespace RPG.Attributes
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] TakeDamageEvent takeDamage = null;
+        [SerializeField] UnityEvent onDie = null;
 
         [System.Serializable]
         public class TakeDamageEvent : UnityEvent<float>
         {
 
         }
+        
 
         float healthPoints = -1f;
 
@@ -52,7 +54,11 @@ namespace RPG.Attributes
                 takeDamage.Invoke(damage);
                 healthPoints -= damage;
                 this.instigator = instigator;
-                CheckIfDead();
+                if(CheckIfDead())
+                {
+                    AwardExperience();
+                    onDie.Invoke();
+                }
             }
         }
 
@@ -61,13 +67,14 @@ namespace RPG.Attributes
             healthPoints = baseStats.GetStat(Stat.Health);
         }
 
-        private void CheckIfDead()
+        private bool CheckIfDead()
         {
             if (healthPoints <= 0)
             {
                 Die();
-                AwardExperience();
+                return true;
             }
+            return false;
         }
 
         private void Die()
