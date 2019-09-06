@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using RPG.Resources;
 using UnityEngine.UI;
 using System;
 

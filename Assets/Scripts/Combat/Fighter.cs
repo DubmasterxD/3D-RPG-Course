@@ -2,7 +2,7 @@
 using UnityEngine;
 using RPG.Core;
 using RPG.Movement;
-using RPG.Resources;
+using RPG.Attributes;
 using RPG.Saving;
 using RPG.Stats;
 
@@ -113,7 +113,7 @@ namespace RPG.Combat
 
         public void RestoreState(object state)
         {
-            Weapon weapon = UnityEngine.Resources.Load<Weapon>((string)state);
+            Weapon weapon = Resources.Load<Weapon>((string)state);
             EquipWeapon(weapon);
         }
 

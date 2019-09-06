@@ -4,11 +4,11 @@ using RPG.Stats;
 using RPG.Core;
 using UnityEngine.Events;
 
-namespace RPG.Resources
+namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] TakeDamageEvent takeDamage;
+        [SerializeField] TakeDamageEvent takeDamage = null;
 
         [System.Serializable]
         public class TakeDamageEvent : UnityEvent<float>

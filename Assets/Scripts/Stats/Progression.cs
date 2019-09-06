@@ -56,8 +56,8 @@ namespace RPG.Stats
         [System.Serializable]
         class ProgressionStats
         {
-            public Stat stat;
-            public float[] levels;
+            public Stat stat = default;
+            public float[] levels = null;
         }
     }
 }

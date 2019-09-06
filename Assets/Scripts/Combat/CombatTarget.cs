@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using RPG.Resources;
+using RPG.Attributes;
 using RPG.Control;
 
 namespace RPG.Combat
@@ -10,13 +10,13 @@ namespace RPG.Combat
         public bool HandleRaycast(PlayerController callingController)
         {
             Fighter fighter = callingController.gameObject.GetComponent<Fighter>();
-            if (!fighter.CanAttack(this.gameObject))
+            if (!fighter.CanAttack(gameObject))
             {
                 return false;
             }
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
             {
-                fighter.Attack(this.gameObject);
+                fighter.Attack(gameObject);
             }
             return true;
         }
